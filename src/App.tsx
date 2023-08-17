@@ -1,11 +1,13 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/home/Home';
 import './App.css';
-import { getCategories } from './services/api';
 
 function App() {
-  console.log(getCategories());
   return (
-    <h1>Mercado livre</h1>
+    <Routes>
+      <Route path="/" element={ <Home /> } />
+    </Routes>
   );
 }
 
