@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getCategories } from '../../services/api';
+
+type ProductCategory = {
+  id: string,
+  name: string,
+};
 
 export default function Home() {
-  // const [changeText, setChangeText] = useState(true);
-  // const [inputValue, setInputValue] = useState('');
-  // const handleText = () => {
-  //   setChangeText(!changeText);
-  // };
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setInputValue(event.target.value);
-  // };
+  const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
+
+  useEffect(() => {
+    const categories = async () => {
+      const result = await getCategories();
+      setProductCategories(result);
+    };
+    categories();
+  }, []);
 
   return (
     <div>
-      {/* <input
-        type="text"
-        value={inputValue}
-        onChange={(event) => handleInputChange(event)}
-      /> */}
+      <aside>
+        {productCategories.map((category) => (
+          <button
+            data-testid="category"
+            key={ category.id }
+          >
+            {category.name}
+          </button>
+        ))}
+      </aside>
       <p data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
