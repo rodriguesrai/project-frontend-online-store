@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
-export default function Header() {
-  const [inputValue, setInputValue] = useState('');
+type HeaderProps = {
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>)=> void,
+  handleSearch: ()=> void,
+  inputValue: string,
+};
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
-
+export default function Header({
+  handleInputChange,
+  inputValue,
+  handleSearch,
+}: HeaderProps) {
   return (
     <section>
       <div>
@@ -16,7 +20,14 @@ export default function Header() {
           type="text"
           value={ inputValue }
           onChange={ (event) => handleInputChange(event) }
+          data-testid="query-input"
         />
+        <button
+          data-testid="query-button"
+          onClick={ handleSearch }
+        >
+          enviar
+        </button>
       </div>
       <div>
         <h1>Front-End</h1>
