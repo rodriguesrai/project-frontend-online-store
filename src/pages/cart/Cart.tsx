@@ -16,9 +16,13 @@ export default function Cart({ cart }: CartProps) {
     }, 0);
     setValue(total);
   };
+
   useEffect(() => {
-    totalValue();
+    if (cart) {
+      totalValue();
+    }
   }, [cart]);
+
   return (
   // renderização de cada Cart após clicar no botão de adicionar ao carrinho
     <>
