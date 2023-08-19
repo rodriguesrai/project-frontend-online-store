@@ -5,7 +5,12 @@ import Header from '../../components/header/header';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { ProductCategory, ProductInfoType } from '../../services/types';
 
-export default function Home() {
+type HomeProps = {
+// Definição da propriedade da função addCart a partir do objeto product
+  addCart: (product: ProductInfoType) => void
+};
+
+export default function Home({ addCart }: HomeProps) {
   const [productCategories, setProductCategories] = useState<ProductCategory[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [searchResults, setSearchResults] = useState<ProductInfoType[]>([]);
@@ -60,11 +65,25 @@ export default function Home() {
         </aside>
         <div>
           {selectCategory.map(
-            (product) => <ProductCard key={ product.id } product={ product } />,
+            (product) => (
+              <ProductCard
+                key={ product.id }
+                product={ product }
+// Passando a função addCart que veio do App.tsx para o componente ProductCard com o propósito de pegar o onClick do button
+                addCart={ addCart }
+              />
+            ),
           )}
           {(showResults && searchResults.length > 0) && (
             searchResults.map(
-              (product) => <ProductCard key={ product.id } product={ product } />,
+              (product) => (
+                <ProductCard
+                  key={ product.id }
+                  product={ product }
+// Passando a função addCart que veio do App.tsx para o componente ProductCard com o propósito de pegar o onClick do button
+                  addCart={ addCart }
+                />
+              ),
             )
           )}
           {(searchResults.length === 0 && !noSearch) && (
