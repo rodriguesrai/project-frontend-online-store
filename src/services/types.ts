@@ -25,11 +25,12 @@ export const initialProductDetails = {
 id: '',
 title: '',
 thumbnail: '',
-warranty: '',
-sold_quantity: '',
-quantity: 0,
-status: '',
 price: 0,
+quantity: 0,
+
+sold_quantity: '',
+status: '',
+warranty: '',
 available_quantity: 0,
 condition: '',
 shipping: {

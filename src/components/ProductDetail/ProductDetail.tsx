@@ -22,6 +22,7 @@ productByID();
 const handleProducts = () => {
   addCart(product);
 };
+console.log(product)
 
 return (
 <div>
