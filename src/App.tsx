@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Cart from './pages/cart/Cart';
@@ -24,7 +24,43 @@ function App() {
       // atualiza o estado do carrinho e adiciona a propriedade quantity ja que ela nao esta na API
       setShoppingCart([...shoppingCart, { ...product, quantity: 1 }]);
     }
-  //  console.log(product);
+  };
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    setShoppingCart(storedCart);
+  }, []);
+
+  const removeQuantity = (product: ProductInfoType) => {
+    const updatedCart = shoppingCart.map((cartProduct) => {
+      if (cartProduct.id === product.id && cartProduct.quantity > 1) {
+        return { ...cartProduct, quantity: cartProduct.quantity - 1 };
+      }
+      return cartProduct;
+    });
+
+    setShoppingCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const addQuantity = (product: ProductInfoType) => {
+    const updatedCart = shoppingCart.map((cartProduct) => {
+      if (cartProduct.id === product.id) {
+        return { ...cartProduct, quantity: cartProduct.quantity + 1 };
+      }
+      return cartProduct;
+    });
+
+    setShoppingCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const removeCart = (product: ProductInfoType) => {
+    const removeProduct = shoppingCart
+      .filter((productAdd) => product.id !== productAdd.id);
+    setShoppingCart(removeProduct);
+
+    localStorage.setItem('cart', JSON.stringify(removeProduct));
   };
 
   return (
@@ -35,7 +71,14 @@ function App() {
       />
       <Route
         path="/cart"
-        element={ <Cart cart={ shoppingCart } /> }
+        element={
+          <Cart
+            cart={ shoppingCart }
+            removeCart={ (id) => removeCart(id) }
+            addQuantity={ (id) => addQuantity(id) }
+            removeQuantity={ (id) => removeQuantity(id) }
+          />
+        }
       />
       <Route
         path="/details/:id"

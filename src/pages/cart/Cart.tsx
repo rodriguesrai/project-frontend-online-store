@@ -4,10 +4,14 @@ import { ProductInfoType } from '../../services/types';
 
 type CartProps = {
   cart: ProductInfoType[],
+  removeCart: (product: ProductInfoType) => void,
+  addQuantity: (product: ProductInfoType) => void,
+  removeQuantity: (product: ProductInfoType) => void,
 };
 
-export default function Cart({ cart }: CartProps) {
-  //  console.log(cart);
+export default function Cart(
+  { cart, removeCart, addQuantity, removeQuantity }: CartProps,
+) {
   const [value, setValue] = useState(0);
 
   const totalValue = () => {
@@ -24,7 +28,6 @@ export default function Cart({ cart }: CartProps) {
   }, [cart]);
 
   return (
-  // renderização de cada Cart após clicar no botão de adicionar ao carrinho
     <>
       <div>
         <h1>Carrinho de compras</h1>
@@ -44,11 +47,28 @@ export default function Cart({ cart }: CartProps) {
                   {(eachProduct.quantity * eachProduct.price)
                     .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </h2>
-                <AiFillMinusCircle />
+                <button
+                  data-testid="product-decrease-quantity"
+                  onClick={ () => removeQuantity(eachProduct) }
+                >
+                  <AiFillMinusCircle />
+                </button>
                 <h4 data-testid="shopping-cart-product-quantity">
                   {`Qtd: ${eachProduct.quantity}`}
                 </h4>
-                <AiFillPlusCircle />
+                <button
+                  data-testid="product-increase-quantity"
+                  onClick={ () => addQuantity(eachProduct) }
+                >
+
+                  <AiFillPlusCircle />
+                </button>
+                <button
+                  onClick={ () => removeCart(eachProduct) }
+                  data-testid="remove-product"
+                >
+                  Remover
+                </button>
               </div>
             ),
           )
