@@ -42,10 +42,7 @@ export default function Home({ addCart }: HomeProps) {
     const productsCategory = await getByCategoryId(id);
     setSelectCategory(productsCategory.results);
     setShowResults(false);
-    console.log(productsCategory);
   };
-
-  // console.log(productCategories);
 
   return (
     <>

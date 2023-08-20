@@ -8,7 +8,6 @@ import { ProductInfoType } from './services/types';
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState<ProductInfoType[]>([]);
-  // const [quantity, setQuantity] = useState(1);
 
   const addCart = (product: ProductInfoType) => {
     const productAlreadyAdd = shoppingCart
@@ -25,13 +24,10 @@ function App() {
       // atualiza o estado do carrinho e adiciona a propriedade quantity ja que ela nao esta na API
       setShoppingCart([...shoppingCart, { ...product, quantity: 1 }]);
     }
-  //  console.log(product);
   };
   useEffect(() => {
-    // Recupere os dados do carrinho do localStorage
     const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-    // Atualize o estado shoppingCart com os dados recuperados
     setShoppingCart(storedCart);
   }, []);
 

@@ -13,7 +13,6 @@ export default function Cart(
   { cart, removeCart, addQuantity, removeQuantity }: CartProps,
 ) {
   const [value, setValue] = useState(0);
-  // const [getLocal, setLocal] = useState<ProductInfoType[]>([]);
 
   const totalValue = () => {
     const total = cart.reduce((acc, item) => {
@@ -22,34 +21,13 @@ export default function Cart(
     setValue(total);
   };
 
-  // useEffect(() => {
-  //   const getFromLocal = localStorage.getItem('cart');
-  //   const item = JSON.parse(getFromLocal as string);
-  //   console.log(item);
-  //   setGetItensFromLocal(item);
-  //   // console.log(getItensFromLocal);
-  // }, []);
-
-  // // var storedArray = localStorage.getItem("ourarraykey");
-  // // ourArray = JSON.parse(storedArray);
-
-  // useEffect(() => {
-  //   const getFromLocal = JSON.parse(localStorage.getItem('cart') as string) || [];
-  //   // const item = getFromLocal) || [];
-  //   setLocal(getFromLocal);
-  //   console.log(getFromLocal);
-  // }, []);
-
   useEffect(() => {
     if (cart) {
       totalValue();
     }
   }, [cart]);
 
-  // console.log(cart);
-
   return (
-  // renderização de cada Cart após clicar no botão de adicionar ao carrinho
     <>
       <div>
         <h1>Carrinho de compras</h1>
