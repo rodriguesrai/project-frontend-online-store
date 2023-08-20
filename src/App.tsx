@@ -39,7 +39,7 @@ function App() {
       />
       <Route
         path="/details/:id"
-        element={ <ProductDetail addCart={ addCart } /> } 
+        element={ <ProductDetail addCart={ addCart } /> }
       />
     </Routes>
   );

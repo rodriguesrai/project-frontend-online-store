@@ -23,5 +23,4 @@ export async function getByCategoryId(id: string) {
   const result = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${id}`);
   const byCategoryID = await result.json();
   return byCategoryID;
-  }
-  
+}

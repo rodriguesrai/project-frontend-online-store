@@ -52,7 +52,9 @@ export default function ProductDetail({ addCart }: ProductDetailProps) {
       <p>
         {`Status do anúncio: ${product.status === 'active' ? 'Ativo' : 'Inativo'}`}
       </p>
-      <Link data-testid="shopping-cart-button" to="/Cart"
+      <Link 
+        data-testid="shopping-cart-button" 
+        to="/Cart"
       >
         <button>
           Ir para o carrinho de compras
