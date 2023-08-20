@@ -8,6 +8,7 @@ import { ProductInfoType } from './services/types';
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState<ProductInfoType[]>([]);
+  // const [quantity, setQuantity] = useState(1);
 
   const addCart = (product: ProductInfoType) => {
     const productAlreadyAdd = shoppingCart
@@ -27,6 +28,31 @@ function App() {
   //  console.log(product);
   };
 
+  const addQuantity = (product: ProductInfoType) => {
+    const updatedCart = shoppingCart.find((cartProduct) => cartProduct.id === product.id);
+    console.log(updatedCart);
+    // setShoppingCart(updatedCart);
+
+    // localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const removeQuantity = (product: ProductInfoType) => {
+    const updatedCart = shoppingCart.find((cartProduct) => cartProduct.id === product.id);
+    console.log(updatedCart);
+    // setShoppingCart(updatedCart);
+
+    // localStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const removeCart = (product: ProductInfoType) => {
+    const removeProduct = shoppingCart
+      .filter((productAdd) => product.id !== productAdd.id);
+
+    setShoppingCart(removeProduct);
+
+    localStorage.setItem('cart', JSON.stringify([removeProduct]));
+  };
+
   return (
     <Routes>
       <Route
@@ -35,7 +61,14 @@ function App() {
       />
       <Route
         path="/cart"
-        element={ <Cart cart={ shoppingCart } /> }
+        element={
+          <Cart
+            cart={ shoppingCart }
+            removeCart={ (id) => removeCart(id) }
+            addQuantity={ (id) => addQuantity(id) }
+            removeQuantity={ (id) => removeQuantity(id) }
+          />
+        }
       />
       <Route
         path="/details/:id"

@@ -4,11 +4,16 @@ import { ProductInfoType } from '../../services/types';
 
 type CartProps = {
   cart: ProductInfoType[],
+  removeCart: (product: ProductInfoType) => void,
+  addQuantity: (product: ProductInfoType) => void,
+  removeQuantity: (product: ProductInfoType) => void,
 };
 
-export default function Cart({ cart }: CartProps) {
-  //  console.log(cart);
+export default function Cart(
+  { cart, removeCart, addQuantity, removeQuantity }: CartProps,
+) {
   const [value, setValue] = useState(0);
+  // const [quantity, setQuantity]
 
   const totalValue = () => {
     const total = cart.reduce((acc, item) => {
@@ -44,11 +49,23 @@ export default function Cart({ cart }: CartProps) {
                   {(eachProduct.quantity * eachProduct.price)
                     .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </h2>
-                <AiFillMinusCircle />
+                <button
+                  data-testid="product-decrease-quantity"
+                >
+                  <AiFillMinusCircle />
+                </button>
                 <h4 data-testid="shopping-cart-product-quantity">
                   {`Qtd: ${eachProduct.quantity}`}
                 </h4>
-                <AiFillPlusCircle />
+                <button data-testid="product-increase-quantity">
+                  <AiFillPlusCircle />
+                </button>
+                <button
+                  onClick={ () => removeCart(eachProduct) }
+                  data-testid="remove-product"
+                >
+                  Remover
+                </button>
               </div>
             ),
           )
