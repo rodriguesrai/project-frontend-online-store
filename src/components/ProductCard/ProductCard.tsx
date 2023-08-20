@@ -19,12 +19,13 @@ export default function ProductCard({ product, addCart }: ProductCardProps) {
 
   return (
     <div data-testid="product">
-      <h2>{product.title}</h2>
+      <h2>{ product.title }</h2>
       <img src={ product.thumbnail } alt={ product.title } />
-      <h3>{formattedPrice}</h3>
-      <Link 
+      <h3>{ formattedPrice }</h3>
+      <Link
         data-testid="product-detail-link"
-        to={ `/details/${ product.id }` } >
+        to={ `/details/${ product.id }` } 
+      >
         <h4>VEJA MAIS DETALHES</h4>
       </Link>
       <button

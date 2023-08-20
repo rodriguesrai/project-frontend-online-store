@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { initialProductDetails, ProductInfoType } from '../../services/types';
 import { Link, useParams } from 'react-router-dom';
+import { initialProductDetails, ProductInfoType } from '../../services/types';
 import { getProductById } from '../../services/api';
 
 type ProductDetailProps = {
@@ -9,7 +9,7 @@ type ProductDetailProps = {
 
 export default function ProductDetail({ addCart }: ProductDetailProps) {
   const [product, setProduct] = useState<ProductInfoType>(
-    initialProductDetails
+    initialProductDetails,
   );
   const { id } = useParams();
   useEffect(() => {
@@ -27,22 +27,22 @@ export default function ProductDetail({ addCart }: ProductDetailProps) {
 
   return (
     <div>
-      <h3 data-testid="product-detail-name">{product.title}</h3>
+      <h3 data-testid="product-detail-name">{ product.title }</h3>
       <img
         data-testid="product-detail-image"
-        src={product.thumbnail}
-        alt={product.title}
+        src={ product.thumbnail }
+        alt={ product.title }
       />
       <h3 data-testid="product-detail-price">
-        {`Preço: R$ ${product.price.toFixed(2)}`}
+        {`Preço: R$ ${ product.price.toFixed(2) }`}
       </h3>
-      <button data-testid="product-detail-add-to-cart" onClick={handleProducts}>
+      <button data-testid="product-detail-add-to-cart" onClick={ handleProducts }>
         Adicionar ao carrinho
       </button>
       <h4>Especificação técnica do produto:</h4>
-      <p>{product.warranty}</p>
-      <p>{`Quantidade vendida: ${product.sold_quantity}`}</p>
-      <p>{`Quantidade disponível: ${product.available_quantity}`}</p>
+      <p>{ product.warranty }</p>
+      <p>{`Quantidade vendida: ${ product.sold_quantity }`}</p>
+      <p>{`Quantidade disponível: ${ product.available_quantity }`}</p>
       <p>{`Entrega grátis: ${
         product.shipping?.free_shipping ? 'Sim' : 'Não'
       }`}</p>
