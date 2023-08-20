@@ -13,7 +13,7 @@ export default function Cart(
   { cart, removeCart, addQuantity, removeQuantity }: CartProps,
 ) {
   const [value, setValue] = useState(0);
-  // const [quantity, setQuantity]
+  const [getLocal, setLocal] = useState<ProductInfoType[]>([]);
 
   const totalValue = () => {
     const total = cart.reduce((acc, item) => {
@@ -22,11 +22,31 @@ export default function Cart(
     setValue(total);
   };
 
+  // useEffect(() => {
+  //   const getFromLocal = localStorage.getItem('cart');
+  //   const item = JSON.parse(getFromLocal as string);
+  //   console.log(item);
+  //   setGetItensFromLocal(item);
+  //   // console.log(getItensFromLocal);
+  // }, []);
+
+  // var storedArray = localStorage.getItem("ourarraykey");
+  // ourArray = JSON.parse(storedArray);
+
+  useEffect(() => {
+    const getFromLocal = JSON.parse(localStorage.getItem('cart') as string) || [];
+    // const item = getFromLocal) || [];
+    setLocal(getFromLocal);
+    console.log(setLocal);
+  }, []);
+
   useEffect(() => {
     if (cart) {
       totalValue();
     }
   }, [cart]);
+
+  // console.log(cart);
 
   return (
   // renderização de cada Cart após clicar no botão de adicionar ao carrinho
@@ -51,13 +71,18 @@ export default function Cart(
                 </h2>
                 <button
                   data-testid="product-decrease-quantity"
+                  onClick={ () => removeQuantity(eachProduct) }
                 >
                   <AiFillMinusCircle />
                 </button>
                 <h4 data-testid="shopping-cart-product-quantity">
                   {`Qtd: ${eachProduct.quantity}`}
                 </h4>
-                <button data-testid="product-increase-quantity">
+                <button
+                  data-testid="product-increase-quantity"
+                  onClick={ () => addQuantity(eachProduct) }
+                >
+
                   <AiFillPlusCircle />
                 </button>
                 <button

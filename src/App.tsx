@@ -28,29 +28,36 @@ function App() {
   //  console.log(product);
   };
 
-  const addQuantity = (product: ProductInfoType) => {
-    const updatedCart = shoppingCart.find((cartProduct) => cartProduct.id === product.id);
-    console.log(updatedCart);
-    // setShoppingCart(updatedCart);
+  const removeQuantity = (product: ProductInfoType) => {
+    const updatedCart = shoppingCart.map((cartProduct) => {
+      if (cartProduct.id === product.id && cartProduct.quantity > 1) {
+        return { ...cartProduct, quantity: cartProduct.quantity - 1 };
+      }
+      return cartProduct;
+    });
 
-    // localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setShoppingCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
-  const removeQuantity = (product: ProductInfoType) => {
-    const updatedCart = shoppingCart.find((cartProduct) => cartProduct.id === product.id);
-    console.log(updatedCart);
-    // setShoppingCart(updatedCart);
+  const addQuantity = (product: ProductInfoType) => {
+    const updatedCart = shoppingCart.map((cartProduct) => {
+      if (cartProduct.id === product.id) {
+        return { ...cartProduct, quantity: cartProduct.quantity + 1 };
+      }
+      return cartProduct;
+    });
 
-    // localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setShoppingCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   const removeCart = (product: ProductInfoType) => {
     const removeProduct = shoppingCart
       .filter((productAdd) => product.id !== productAdd.id);
-
     setShoppingCart(removeProduct);
 
-    localStorage.setItem('cart', JSON.stringify([removeProduct]));
+    localStorage.setItem('cart', JSON.stringify(removeProduct));
   };
 
   return (
