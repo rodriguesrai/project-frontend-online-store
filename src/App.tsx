@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Cart from './pages/cart/Cart';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 import './App.css';
 import { ProductInfoType } from './services/types';
 
@@ -35,6 +36,10 @@ function App() {
       <Route
         path="/cart"
         element={ <Cart cart={ shoppingCart } /> }
+      />
+      <Route
+        path="/details/:id"
+        element={ <ProductDetail addCart={ addCart } /> }
       />
     </Routes>
   );
