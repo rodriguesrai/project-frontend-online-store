@@ -60,6 +60,13 @@ export default function ProductDetail({ addCart }: ProductDetailProps) {
           Ir para o carrinho de compras
         </button>
       </Link>
+      <Link        
+        to="/"
+      >
+        <button>
+          Continuar comprando
+        </button>
+      </Link>
     </div>
   );
 }
