@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Cart from './pages/cart/Cart';
@@ -27,6 +27,13 @@ function App() {
     }
   //  console.log(product);
   };
+  useEffect(() => {
+    // Recupere os dados do carrinho do localStorage
+    const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Atualize o estado shoppingCart com os dados recuperados
+    setShoppingCart(storedCart);
+  }, []);
 
   const removeQuantity = (product: ProductInfoType) => {
     const updatedCart = shoppingCart.map((cartProduct) => {
