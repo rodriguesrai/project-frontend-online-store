@@ -24,7 +24,7 @@ export default function ProductCard({ product, addCart }: ProductCardProps) {
       <h3>{ formattedPrice }</h3>
       <Link
         data-testid="product-detail-link"
-        to={ `/details/${ product.id }` } 
+        to={ `/details/${product.id}` }
       >
         <h4>VEJA MAIS DETALHES</h4>
       </Link>

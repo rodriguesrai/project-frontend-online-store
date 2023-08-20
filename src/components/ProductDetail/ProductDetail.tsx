@@ -34,26 +34,29 @@ export default function ProductDetail({ addCart }: ProductDetailProps) {
         alt={ product.title }
       />
       <h3 data-testid="product-detail-price">
-        {`Preço: R$ ${ product.price.toFixed(2) }`}
+        {`Preço: R$ ${product.price.toFixed(2)}`}
       </h3>
       <button data-testid="product-detail-add-to-cart" onClick={ handleProducts }>
         Adicionar ao carrinho
       </button>
       <h4>Especificação técnica do produto:</h4>
       <p>{ product.warranty }</p>
-      <p>{`Quantidade vendida: ${ product.sold_quantity }`}</p>
-      <p>{`Quantidade disponível: ${ product.available_quantity }`}</p>
-      <p>{`Entrega grátis: ${
-        product.shipping?.free_shipping ? 'Sim' : 'Não'
-      }`}</p>
-      <p>{`Condição: ${
-        product.condition === 'new' ? 'Produto novo.' : 'Produto usado.'
-      }`}</p>
-      <p>{`Status do anúncio: ${
-        product.status === 'active' ? 'Ativo' : 'Inativo'
-      }`}</p>
-      <Link data-testid="shopping-cart-button" to="/Cart">
-        <button>Ir para o carrinho de compras</button>
+      <p>{`Quantidade vendida: ${product.sold_quantity}`}</p>
+      <p>{`Quantidade disponível: ${product.available_quantity}`}</p>
+      <p>
+        {`Entrega grátis: ${product.shipping?.free_shipping ? 'Sim' : 'Não'}`}
+      </p>
+      <p>
+        {`Condição: ${product.condition === 'new' ? 'Novo' : 'Usado'}`}
+      </p>
+      <p>
+        {`Status do anúncio: ${product.status === 'active' ? 'Ativo' : 'Inativo'}`}
+      </p>
+      <Link data-testid="shopping-cart-button" to="/Cart"
+      >
+        <button>
+          Ir para o carrinho de compras
+        </button>
       </Link>
     </div>
   );
