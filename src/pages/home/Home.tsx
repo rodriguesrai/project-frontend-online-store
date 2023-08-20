@@ -19,6 +19,9 @@ export default function Home({ addCart }: HomeProps) {
   const [showResults, setShowResults] = useState(true);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (inputValue !== '') {
+      setInputValue('');
+    }
     setInputValue(event.target.value);
   };
 
